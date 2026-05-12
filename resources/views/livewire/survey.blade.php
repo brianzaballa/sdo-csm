@@ -1,41 +1,37 @@
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
     {{-- CSM Notice Modal --}}
     @if($showNotice)
-        <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="notice-modal" role="dialog" aria-modal="true">
-            <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div class="inline-block align-middle bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full">
-                    <div class="bg-white px-4 pt-4 pb-3 sm:p-5">
-                        <div class="flex items-start gap-3">
-                            <div class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-blue-100">
-                                <svg class="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-base font-bold text-gray-900 mb-2">Client Satisfaction Measurement (CSM)</h3>
-                                <p class="text-xs text-gray-600 mb-2">
-                                    The CSM tracks customer experience of government offices. Your feedback helps improve service delivery.
-                                </p>
-                                <p class="text-xs text-gray-600 mb-2">
-                                    Personal information is confidential. You may skip any question.
-                                </p>
-                                <p class="text-xs font-semibold text-gray-700">
-                                    ANTI-RED TAPE AUTHORITY
-                                </p>
-                                <p class="text-xs text-gray-500">
-                                    PSA Approval No. ARTA-2242-3
-                                </p>
-                            </div>
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500/75 px-4" role="dialog" aria-modal="true">
+            <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-auto">
+                <div class="p-5">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-blue-100">
+                            <svg class="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-base font-bold text-gray-900 mb-2">Client Satisfaction Measurement (CSM)</h3>
+                            <p class="text-xs text-gray-600 mb-2">
+                                The CSM tracks customer experience of government offices. Your feedback helps improve service delivery.
+                            </p>
+                            <p class="text-xs text-gray-600 mb-2">
+                                Personal information is confidential. You may skip any question.
+                            </p>
+                            <p class="text-xs font-semibold text-gray-700">
+                                ANTI-RED TAPE AUTHORITY
+                            </p>
+                            <p class="text-xs text-gray-500">
+                                PSA Approval No. ARTA-2242-3
+                            </p>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-4 py-2 sm:px-5 sm:flex sm:flex-row-reverse">
-                        <button type="button" wire:click="closeNotice"
-                                class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto transition-all">
-                            I Understand
-                        </button>
-                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-2 rounded-b-xl flex justify-end">
+                    <button type="button" wire:click="closeNotice"
+                            class="w-full sm:w-auto inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all">
+                        I Understand
+                    </button>
                 </div>
             </div>
         </div>
