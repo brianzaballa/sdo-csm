@@ -79,7 +79,7 @@
     <div class="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 shadow-lg">
         <div class="max-w-2xl mx-auto px-4 py-6 sm:px-6 text-center">
             <div class="flex items-center justify-center gap-3 mb-2">
-                <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQXyZqOWPPtRn8s4bwht4TKdA-G_QiDhRi4Qrv9fIdttAlqNVqkVTgkc7gU2rTQfugNHArgNYDOGi5Jf2ngzdpsR6PAycVzj5d_-xBubo-1w_cixlSRbeN8Xi37sBz2RmQ6OYiAByZtkd2NIK_B-3PjzhIr=w16383"
+                <img src="https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png"
                      alt="SDO Legazpi City Logo"
                      class="h-16 w-16 rounded-full bg-white/20 backdrop-blur object-contain p-1">
             </div>

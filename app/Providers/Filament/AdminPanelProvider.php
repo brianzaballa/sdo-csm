@@ -6,7 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
+use App\Filament\Pages\AnalyticsDashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -30,9 +30,9 @@ class AdminPanelProvider extends PanelProvider
 
             // ── Branding ────────────────────────────────
             ->brandName('CSM Admin')
-            ->brandLogo(asset('images/logo.png'))
+            ->brandLogo('https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png')
             ->brandLogoHeight('2.5rem')
-            ->favicon(asset('images/logo.png'))
+            ->favicon('https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png')
 
             // ── Login ────────────────────────────────────
             ->login()
@@ -66,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
                 for: 'App\Filament\Pages')
 
             ->pages([
-                Dashboard::class,
+                AnalyticsDashboard::class,
             ])
 
             ->discoverWidgets
