@@ -166,15 +166,18 @@
                         </div>
 
                         {{-- Office --}}
-                        <div>
+                        <div x-data="{ officeSearch: '' }">
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">
                                 Office transacted with <span class="text-red-500">*</span>
                             </label>
+                            <input type="text" x-model="officeSearch" placeholder="Search office..."
+                                   class="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-4 py-3 mb-2">
                             <select wire:model.live="officeId"
                                     class="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-4 py-3">
                                 <option value="">Select Office</option>
                                 @foreach($this->offices as $office)
-                                    <option value="{{ $office->id }}">{{ $office->display_name }}</option>
+                                    <option value="{{ $office->id }}"
+                                        x-show="officeSearch === '' || '{{ strtolower($office->display_name) }}'.includes(officeSearch.toLowerCase())">{{ $office->display_name }}</option>
                                 @endforeach
                             </select>
                             @error('officeId') <p class="mt-1.5 text-sm text-red-500 flex items-center gap-1">
@@ -425,35 +428,77 @@
                                       class="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-4 py-3"></textarea>
                         </div>
 
-                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
-                            <h3 class="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 space-y-4">
+                            <h3 class="text-sm font-bold text-gray-800 flex items-center gap-2">
                                 <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                                 </svg>
                                 Review your answers
                             </h3>
-                            <dl class="text-sm space-y-2">
-                                <div class="flex items-start">
-                                    <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Office</dt>
-                                    <dt class="text-gray-400 mx-2">:</dt>
-                                    <dd class="text-gray-800 font-medium">{{ $this->offices->firstWhere('id', $officeId)?->display_name }}</dd>
+
+                            {{-- Client Info --}}
+                            <div>
+                                <h4 class="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-2">Client Information</h4>
+                                <dl class="text-sm space-y-1.5">
+                                    <div class="flex items-start">
+                                        <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Office</dt>
+                                        <dd class="text-gray-800 font-medium">: {{ $this->offices->firstWhere('id', $officeId)?->display_name }}</dd>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Service</dt>
+                                        <dd class="text-gray-800 font-medium">: {{ $this->services->firstWhere('id', $serviceId)?->name }}</dd>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Age / Gender</dt>
+                                        <dd class="text-gray-800 font-medium">: {{ $age }} / {{ $gender }}</dd>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Type</dt>
+                                        <dd class="text-gray-800 font-medium">: {{ $customerType }}</dd>
+                                    </div>
+                                </dl>
+                            </div>
+
+                            {{-- Citizen's Charter --}}
+                            @if($cc1)
+                                <div>
+                                    <h4 class="text-xs font-semibold text-amber-600 uppercase tracking-wide mb-2">Citizen's Charter</h4>
+                                    <dl class="text-sm space-y-1.5">
+                                        <div class="flex items-start">
+                                            <dt class="w-12 font-medium text-gray-500 flex-shrink-0">CC1</dt>
+                                            <dd class="text-gray-800 font-medium">: {{ \App\Models\SurveyResponse::cc1Labels()[$cc1] ?? $cc1 }}</dd>
+                                        </div>
+                                        @if($cc2)
+                                            <div class="flex items-start">
+                                                <dt class="w-12 font-medium text-gray-500 flex-shrink-0">CC2</dt>
+                                                <dd class="text-gray-800 font-medium">: {{ \App\Models\SurveyResponse::cc2Labels()[$cc2] ?? $cc2 }}</dd>
+                                            </div>
+                                        @endif
+                                        @if($cc3)
+                                            <div class="flex items-start">
+                                                <dt class="w-12 font-medium text-gray-500 flex-shrink-0">CC3</dt>
+                                                <dd class="text-gray-800 font-medium">: {{ \App\Models\SurveyResponse::cc3Labels()[$cc3] ?? $cc3 }}</dd>
+                                            </div>
+                                        @endif
+                                    </dl>
                                 </div>
-                                <div class="flex items-start">
-                                    <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Service</dt>
-                                    <dt class="text-gray-400 mx-2">:</dt>
-                                    <dd class="text-gray-800 font-medium">{{ $this->services->firstWhere('id', $serviceId)?->name }}</dd>
-                                </div>
-                                <div class="flex items-start">
-                                    <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Age / Gender</dt>
-                                    <dt class="text-gray-400 mx-2">:</dt>
-                                    <dd class="text-gray-800 font-medium">{{ $age }} / {{ $gender }}</dd>
-                                </div>
-                                <div class="flex items-start">
-                                    <dt class="w-24 font-medium text-gray-500 flex-shrink-0">Type</dt>
-                                    <dt class="text-gray-400 mx-2">:</dt>
-                                    <dd class="text-gray-800 font-medium">{{ $customerType }}</dd>
-                                </div>
-                            </dl>
+                            @endif
+
+                            {{-- Service Quality --}}
+                            <div>
+                                <h4 class="text-xs font-semibold text-purple-600 uppercase tracking-wide mb-2">Service Quality</h4>
+                                <dl class="text-sm space-y-1.5">
+                                    @foreach(\App\Models\SurveyResponse::sqdQuestions() as $key => $question)
+                                        @php $val = $$key; @endphp
+                                        @if($val !== null)
+                                            <div class="flex items-start">
+                                                <dt class="w-10 font-medium text-gray-500 flex-shrink-0">{{ strtoupper($key) }}</dt>
+                                                <dd class="text-gray-800">: <span class="font-medium">{{ \App\Models\SurveyResponse::ratingLabel((int) $val) }}</span> <span class="text-base">{{ \App\Models\SurveyResponse::ratingEmoji((int) $val) }}</span></dd>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </dl>
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -497,11 +542,21 @@
                                 Save for Later
                             </button>
                             <button type="button" wire:click="submit"
-                                    class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-md hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                                Submit
+                                    wire:loading.attr="disabled"
+                                    wire:target="submit"
+                                    class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-md hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all disabled:opacity-60 disabled:cursor-not-allowed">
+                                <span wire:loading.remove wire:target="submit">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </span>
+                                <span wire:loading wire:target="submit">
+                                    <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                    </svg>
+                                </span>
+                                <span wire:loading.remove wire:target="submit">Submit</span>
+                                <span wire:loading wire:target="submit">Submitting...</span>
                             </button>
                         @endif
                     </div>
