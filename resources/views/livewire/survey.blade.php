@@ -78,19 +78,6 @@
         </div>
     @endif
 
-    {{-- Top Banner --}}
-    <div class="sticky top-0 z-30 bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 shadow-lg">
-        <div class="max-w-2xl mx-auto px-4 py-6 sm:px-6 text-center">
-            <div class="flex items-center justify-center gap-3 mb-2">
-                <img src="https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png"
-                     alt="SDO Legazpi City Logo"
-                     class="h-16 w-16 rounded-full bg-white/20 backdrop-blur object-contain p-1">
-            </div>
-            <h1 class="text-xl sm:text-2xl font-bold text-white tracking-wide">Client Satisfaction Measurement</h1>
-            <p class="mt-1 text-sm text-blue-100">Schools Division Office - Legazpi City</p>
-        </div>
-    </div>
-
     <div class="max-w-2xl mx-auto px-4 py-8 sm:px-6">
 
         @if($submitted)
