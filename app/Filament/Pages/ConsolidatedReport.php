@@ -226,31 +226,42 @@ class ConsolidatedReport extends Page implements HasForms
         $services = $office->services;
         $headers  = ['Category', 'Item', ...$services->pluck('name')->map(fn($n) => \Str::limit($n, 20))->toArray()];
 
-        $rows = [];
+        // Collect per-service data
+        $serviceData = [];
         foreach ($services as $service) {
             $r = RS::query($year, $quarter, $office->id)
                 ->where('service_id', $service->id)
                 ->get();
 
             $rating = RS::computeNumericalRating($r);
+            $avgDuration = $r->whereNotNull('duration_seconds')->avg('duration_seconds');
+            $durationLabel = $avgDuration
+                ? sprintf('%d:%02d', intdiv((int) round($avgDuration), 60), (int) round($avgDuration) % 60)
+                : '—';
 
-            $rows[] = [
-                'category' => 'Total',
-                'item'     => 'Respondents',
-                'values'   => [$r->count()],
-                'type'     => 'data',
+            $serviceData[] = [
+                'count'          => $r->count(),
+                'numerical'      => $rating ? number_format($rating, 2) : 'N/A',
+                'adjectival'     => RS::adjectivalRating($rating),
+                'avg_fill_time'  => $durationLabel,
             ];
+        }
+
+        // Build horizontal rows: one row per metric, values across all services
+        $metricRows = [
+            ['category' => 'Total',   'item' => 'Respondents',  'key' => 'count',         'type' => 'data'],
+            ['category' => 'Rating',  'item' => 'Numerical',    'key' => 'numerical',     'type' => 'rating'],
+            ['category' => 'Rating',  'item' => 'Adjectival',   'key' => 'adjectival',    'type' => 'adjectival'],
+            ['category' => 'Timing',  'item' => 'Avg Fill Time','key' => 'avg_fill_time', 'type' => 'data'],
+        ];
+
+        $rows = [];
+        foreach ($metricRows as $m) {
             $rows[] = [
-                'category' => 'Rating',
-                'item'     => 'Numerical',
-                'values'   => [$rating ? number_format($rating, 2) : 'N/A'],
-                'type'     => 'rating',
-            ];
-            $rows[] = [
-                'category' => 'Rating',
-                'item'     => 'Adjectival',
-                'values'   => [RS::adjectivalRating($rating)],
-                'type'     => 'adjectival',
+                'category' => $m['category'],
+                'item'     => $m['item'],
+                'values'   => collect($serviceData)->pluck($m['key'])->toArray(),
+                'type'     => $m['type'],
             ];
         }
 
@@ -295,23 +306,34 @@ class ConsolidatedReport extends Page implements HasForms
             $responses = RS::query($year, $quarter, $office->id)->get();
             $rating    = RS::computeNumericalRating($responses);
 
+            $avgDuration = $responses->whereNotNull('duration_seconds')->avg('duration_seconds');
+            $durationLabel = $avgDuration
+                ? sprintf('%d:%02d', intdiv((int) round($avgDuration), 60), (int) round($avgDuration) % 60)
+                : '—';
+
             $rows[] = [
-                'office'     => $office->name,
-                'total'      => $responses->count(),
-                'numerical'  => $rating ? number_format($rating, 2) : 'N/A',
-                'adjectival' => RS::adjectivalRating($rating),
+                'office'        => $office->name,
+                'total'         => $responses->count(),
+                'numerical'     => $rating ? number_format($rating, 2) : 'N/A',
+                'adjectival'    => RS::adjectivalRating($rating),
+                'avg_fill_time' => $durationLabel,
             ];
         }
 
         // Overall
         $all     = RS::query($year, $quarter)->get();
         $overall = RS::computeNumericalRating($all);
+        $allAvgDuration = $all->whereNotNull('duration_seconds')->avg('duration_seconds');
+        $overallDurationLabel = $allAvgDuration
+            ? sprintf('%d:%02d', intdiv((int) round($allAvgDuration), 60), (int) round($allAvgDuration) % 60)
+            : '—';
         $rows[] = [
-            'office'     => 'OVERALL',
-            'total'      => $all->count(),
-            'numerical'  => $overall ? number_format($overall, 2) : 'N/A',
-            'adjectival' => RS::adjectivalRating($overall),
-            'is_total'   => true,
+            'office'        => 'OVERALL',
+            'total'         => $all->count(),
+            'numerical'     => $overall ? number_format($overall, 2) : 'N/A',
+            'adjectival'    => RS::adjectivalRating($overall),
+            'avg_fill_time' => $overallDurationLabel,
+            'is_total'      => true,
         ];
 
         return ['quarter' => $quarter, 'rows' => $rows];

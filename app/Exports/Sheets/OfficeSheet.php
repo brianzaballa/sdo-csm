@@ -239,6 +239,20 @@ class OfficeSheet implements FromArray, WithTitle, WithStyles, WithColumnWidths
             )->toArray()
         ];
 
+        $rows[] = [
+            'Avg Fill Time',
+            '',
+            ...$services->map(function ($s) use ($allServiceData) {
+                $avg = $allServiceData[$s->id]['responses']
+                    ->whereNotNull('duration_seconds')
+                    ->avg('duration_seconds');
+
+                return $avg
+                    ? sprintf('%d:%02d', intdiv((int) round($avg), 60), (int) round($avg) % 60)
+                    : '—';
+            })->toArray()
+        ];
+
         $rows[] = ['Most major / most common identified feedback / concern from clients', ''];
         $rows[] = ['', ''];
 

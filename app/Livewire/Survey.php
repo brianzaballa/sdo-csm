@@ -24,6 +24,9 @@ class Survey extends Component
 
     public bool $officeLocked = false;
 
+    // ── Duration Tracking ─────────────────────────────────
+    public ?string $startedAt = null;
+
     public function mount(): void
     {
         $officeId = request()->query('office');
@@ -31,12 +34,14 @@ class Survey extends Component
         if ($officeId && $office = Office::query()->where('is_active', true)->find($officeId)) {
             $this->officeId = $office->id;
             $this->officeLocked = true;
+            $this->startedAt = now()->toDateTimeString();
         }
     }
 
     public function closeNotice(): void
     {
         $this->showNotice = false;
+        $this->startedAt = now()->toDateTimeString();
     }
 
     // ── Step 1: Client Information ────────────────────────
@@ -245,7 +250,17 @@ class Survey extends Component
     {
         $this->validateStep3();
 
-        $response = $this->saveResponse(isComplete: true);
+        $endedAt = now();
+        $durationSeconds = $this->startedAt
+            ? $endedAt->diffInSeconds($this->startedAt)
+            : null;
+
+        $response = $this->saveResponse(
+            isComplete: true,
+            startedAt: $this->startedAt,
+            endedAt: $endedAt,
+            durationSeconds: $durationSeconds,
+        );
 
         $this->detectDuplicate($response);
 
@@ -261,6 +276,7 @@ class Survey extends Component
             'customerType', 'cc1', 'cc2', 'cc3',
             'sqd0', 'sqd1', 'sqd2', 'sqd3', 'sqd4',
             'sqd5', 'sqd6', 'sqd7', 'sqd8', 'suggestion',
+            'startedAt',
         ];
 
         foreach ($fields as $field) {
@@ -270,8 +286,12 @@ class Survey extends Component
         }
     }
 
-    private function saveResponse(bool $isComplete): SurveyResponse
-    {
+    private function saveResponse(
+        bool $isComplete,
+        ?string $startedAt = null,
+        ?\Illuminate\Support\Carbon $endedAt = null,
+        ?int $durationSeconds = null,
+    ): SurveyResponse {
         $cc2 = $this->cc1 === 4 ? null : $this->cc2;
         $cc3 = in_array($this->cc1, [3, 4]) ? null : $this->cc3;
 
@@ -296,6 +316,9 @@ class Survey extends Component
             'suggestion' => $this->suggestion,
             'is_complete' => $isComplete,
             'ip_address' => request()->ip(),
+            'started_at' => $startedAt,
+            'ended_at' => $endedAt,
+            'duration_seconds' => $durationSeconds,
         ]);
     }
 

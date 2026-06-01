@@ -95,6 +95,17 @@ class SurveyResponseExporter extends Exporter
                 ->label('Duplicate')
                 ->formatStateUsing(fn ($state) => $state ? 'Possible Duplicate' : ''),
 
+            ExportColumn::make('started_at')
+                ->label('Started At')
+                ->formatStateUsing(fn ($state) => $state?->format('M d, Y g:i A')),
+
+            ExportColumn::make('ended_at')
+                ->label('Ended At')
+                ->formatStateUsing(fn ($state) => $state?->format('M d, Y g:i A')),
+
+            ExportColumn::make('duration_seconds')
+                ->label('Duration (seconds)'),
+
             ExportColumn::make('created_at')
                 ->label('Submitted At')
                 ->formatStateUsing(fn ($state) => $state?->format('M d, Y g:i A')),

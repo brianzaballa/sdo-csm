@@ -24,23 +24,30 @@ class FeedbackSheet implements FromArray, WithTitle, WithStyles, WithColumnWidth
 
     public function columnWidths(): array
     {
-        return ['A' => 30, 'B' => 80];
+        return ['A' => 30, 'B' => 80, 'C' => 18];
     }
 
     public function array(): array
     {
         $rows    = [];
-        $rows[]  = ['MOST COMMON FEEDBACK PER OFFICE — FY ' . $this->year, ''];
-        $rows[]  = ['', ''];
+        $rows[]  = ['MOST COMMON FEEDBACK PER OFFICE — FY ' . $this->year, '', 'Avg Fill Time'];
+        $rows[]  = ['', '', ''];
 
         $offices = Office::active()->with('services')->orderBy('name')->get();
 
         foreach ($offices as $office) {
-            $suggestions = RS::query($this->year, $this->quarter, $office->id)
+            $responses = RS::query($this->year, $this->quarter, $office->id)->get();
+
+            $suggestions = $responses
                 ->whereNotNull('suggestion')
                 ->where('suggestion', '!=', '')
                 ->pluck('suggestion')
                 ->toArray();
+
+            $avgDuration = $responses->whereNotNull('duration_seconds')->avg('duration_seconds');
+            $durationLabel = $avgDuration
+                ? sprintf('%d:%02d', intdiv((int) round($avgDuration), 60), (int) round($avgDuration) % 60)
+                : '—';
 
             // Show top suggestions (up to 5)
             $topFeedback = implode("\n", array_slice($suggestions, 0, 5));
@@ -48,8 +55,9 @@ class FeedbackSheet implements FromArray, WithTitle, WithStyles, WithColumnWidth
             $rows[] = [
                 $office->name,
                 $topFeedback ?: 'No feedback recorded.',
+                $durationLabel,
             ];
-            $rows[] = ['', ''];
+            $rows[] = ['', '', ''];
         }
 
         return $rows;

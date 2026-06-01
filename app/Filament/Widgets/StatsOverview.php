@@ -54,6 +54,14 @@ class StatsOverview extends StatsOverviewWidget
         $lastMonthRate = $lastMonth > 0 ? round(($lastMonthCompleted / $lastMonth) * 100) : 0;
         $currentRate = $total > 0 ? round(($completed / $total) * 100) : 0;
 
+        $avgDuration = SurveyResponse::complete()
+            ->whereNotNull('duration_seconds')
+            ->avg('duration_seconds');
+        $avgDuration = $avgDuration ? round((float) $avgDuration) : null;
+        $avgDurationLabel = $avgDuration
+            ? sprintf('%d:%02d', intdiv($avgDuration, 60), $avgDuration % 60)
+            : '—';
+
         return [
             Stat::make('Total Responses', number_format($total))
                 ->description('All time')
@@ -73,6 +81,11 @@ class StatsOverview extends StatsOverviewWidget
                 ->description('Across all complete responses')
                 ->descriptionIcon('heroicon-o-star')
                 ->color('success'),
+
+            Stat::make('Avg Fill Time', $avgDurationLabel)
+                ->description($avgDuration ? 'Across complete responses' : 'No data yet')
+                ->descriptionIcon('heroicon-o-clock')
+                ->color('info'),
 
             Stat::make('Completion Rate', $currentRate . '%')
                 ->description($completed . ' of ' . $total . ' complete')

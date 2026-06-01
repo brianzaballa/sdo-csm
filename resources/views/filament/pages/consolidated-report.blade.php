@@ -327,6 +327,13 @@
                                        text-center">
                                 Adjectival rating
                             </th>
+                            <th class="px-5 py-3 text-xs font-bold uppercase
+                                       tracking-wider text-gray-500
+                                       dark:text-gray-400 border-b
+                                       border-gray-200 dark:border-gray-700
+                                       text-center">
+                                Avg Fill Time
+                            </th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
@@ -371,13 +378,16 @@
                                 <span class="text-xs text-gray-400 italic">N/A</span>
                                 @endif
                             </td>
+                            <td class="px-5 py-3 text-sm text-center tabular-nums text-gray-600 dark:text-gray-400">
+                                {{ $row['avg_fill_time'] ?? '—' }}
+                            </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4"
+                            <td colspan="5"
                                 class="px-5 py-16 text-center text-sm
                                        text-gray-400 italic">
-                                No data for Q1 of the selected year.
+                                No data for the selected period.
                             </td>
                         </tr>
                         @endforelse

@@ -29,6 +29,7 @@
                 sqd7: $wire.sqd7,
                 sqd8: $wire.sqd8,
                 suggestion: $wire.suggestion,
+                startedAt: $wire.startedAt,
             }));
             $wire.cancelled = true;
             $wire.$commit();

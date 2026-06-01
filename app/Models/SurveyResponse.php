@@ -37,6 +37,10 @@ class SurveyResponse extends Model
         'ip_address',
         'duplicate_of_id',
         'is_flagged',
+        // Duration Tracking
+        'started_at',
+        'ended_at',
+        'duration_seconds',
     ];
 
     protected $casts = [
@@ -57,6 +61,9 @@ class SurveyResponse extends Model
         'ip_address' => 'string',
         'duplicate_of_id' => 'integer',
         'is_flagged' => 'boolean',
+        'started_at' => 'datetime',
+        'ended_at' => 'datetime',
+        'duration_seconds' => 'integer',
     ];
 
     // ── Relationships ──────────────────────────────────────
