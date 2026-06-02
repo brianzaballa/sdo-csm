@@ -11,155 +11,104 @@ class OfficeSeeder extends Seeder
     public function run(): void
     {
         $offices = [
-            ['code' => 'OSDS', 'name' => 'Office of the Schools Division Superintendent', 'services' => [
-                'Issuance of Special Order',
-                'Issuance of Memorandum',
-                'Signing of Documents',
-                'Endorsement of Documents',
+            ['code' => 'CID', 'name' => 'Curriculum and Instruction Division', 'services' => [
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Borrowing and Returning of Supplementary Learning Resources from Library Hub'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Registration for an Account in the LRMDS Portal'],
+
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Quality Assurance of Supplementary Learning Resource'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Submission of Contextualized Learning Resources for Quality Assurance'],
             ]],
-            ['code' => 'ASDS 1', 'name' => 'Office of the Assistant Schools Division Superintendent', 'services' => [
-                'Endorsement of Documents',
-                'Signing of Documents',
-                'Approval of Travel Orders',
+            ['code' => 'Cash', 'name' => 'Admin Unit – Cash', 'services' => [
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Claiming of Checks for Payment of Obligation (made through Checks)'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Handling of Cash Advances'],
             ]],
-            ['code' => 'ASDS 2', 'name' => 'Office of the Assistant Schools Division Superintendent', 'services' => [
-                'Endorsement of Documents',
-                'Signing of Documents',
-                'Approval of Travel Orders',
+            ['code' => 'Budget', 'name' => 'Finance Unit – Budget', 'services' => [
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Posting/Updating of Disbursement'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Processing of Obligation Request and Status (ORS)'],
             ]],
-            ['code' => 'LEGAL', 'name' => 'Legal Unit', 'services' => [
-                'Legal Opinion / Advice',
-                'Notarization of Documents',
-                'Review of Contracts',
-                'Legal Assistance',
+
+            ['code' => 'ICT', 'name' => 'ICT Unit', 'services' => [
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'User Account Management for Centrally Managed Systems'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Troubleshooting of ICT Equipment'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Uploading of Publications'],
             ]],
-            ['code' => 'ICTU', 'name' => 'Information and Communications Technology Unit', 'services' => [
-                'Technical Support',
-                'Network / Internet Concerns',
-                'System Access Request',
-                'Hardware / Software Request',
-                'Website Update Request',
+
+            ['code' => 'Legal', 'name' => 'Legal Unit', 'services' => [
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Correction of Entries in School Records'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Legal Assistance to Walk-in Clients'],
+
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Issuance of Certificate of No Pending Case'],
             ]],
-            ['code' => 'BUDGET', 'name' => 'Budget Section', 'services' => [
-                'Budget Release / Allotment',
-                'Budget Verification',
-                'Financial Assistance Processing',
-                'Review of Budget Documents',
+
+            ['code' => 'Personnel', 'name' => 'Personnel Unit', 'services' => [
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Acceptance of Application for Reclassification of Teaching Positions'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Acceptance of Employment (Non-Teaching and Teaching Related Positions)'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Issuance of Certificate of Employment (COE)'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Issuance of Service Record (SR)'],
+
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Application for Equivalent Record Form (ERF)'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Application for Leave'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Application for Retirement'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Issuance of Certificate of Employment (COE)'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Issuance of Foreign Official Travel Authority'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Issuance of Foreign Personal Travel Authority'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Issuance of Service Record (SR)'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Loan Approval and Verification'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Processing of Appointment (Original, Reemployment, Reappointment, Promotion and Transfer)'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Processing of Terminal Leave Benefits'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Request for Correction of Name and Change of Status'],
             ]],
-            ['code' => 'ACCOUNTING', 'name' => 'Accounting Section', 'services' => [
-                'Processing of Claims',
-                'Issuance of Certificate of No Accountability',
-                'Liquidation Review',
-                'Financial Report Request',
+            ['code' => 'Property & Supply', 'name' => 'Property and Supply Unit', 'services' => [
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Delivery Inspection and Acceptance of Tangible Assets (Supplies/ Materials/ Equipment) – Central Office (CO)-Procured with Logistics Services'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Delivery Inspection and Acceptance of Tangible Assets (Supplies/ Materials/ Equipment) – Central Office (CO)-Procured'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Delivery Inspection and Acceptance of Tangible Assets (Supplies/ Materials/ Equipment)'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Request for Certificate of Final Acceptance or Certificate of Completion'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Request for Supplier’s Performance Evaluation'],
+
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Requisition and Issuance of Supplies'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Property and Equipment Clearance Signing'],
             ]],
-            ['code' => 'PROCUREMENT', 'name' => 'Procurement Unit', 'services' => [
-                'Procurement of Goods',
-                'Procurement of Services',
-                'Bid Document Processing',
-                'Purchase Order Processing',
+            ['code' => 'SGOD - PRS', 'name' => 'School Governance and Operations Division – Planning and Research Section', 'services' => [
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Request for Basic Education Data (Internal Stakeholder)'],
+                ['is_active'=>true, 'is_external'=>false, 'service_name'=>'Request for Data for EBEIS/LIS/NAT and Performance Indicators'],
             ]],
-            ['code' => 'ADMIN', 'name' => 'General Services Section', 'services' => [
-                'Issuance of Clearance',
-                'Facility Reservation',
-                'Vehicle Request',
-                'General Inquiry',
+            ['code' => 'Records', 'name' => 'Records Unit', 'services' => [
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Issuance of Academic School Record (Referral from the School of the Non-Availability of School Records)'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Issuance of Academic School Records for Certification, Authentication, and Verification (CAV) of ALS and PEPT Completers/Passers'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Issuance of Academic School Records for Certification, Authentication, and Verification (CAV) for Learners from Closed Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Issuance of Requested Documents – Walk-In'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Issuance of Requested Documents (Online)'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Handling of Incoming Communications'],
             ]],
-            ['code' => 'PERSONNEL', 'name' => 'Personnel Unit', 'services' => [
-                'Issuance of Certificate of Employment',
-                'Processing of Leave Applications',
-                'Personnel Action Processing',
-                'Employee Records Request',
-                'Service Record Request',
+            ['code' => 'SGOD', 'name' => 'School Governance and Operations Division', 'services' => [
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application for the Issuance of Government Recognition to Private Schools (Kindergarten, Elementary, and Junior High School levels)'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application for the Issuance of Government Permit to Operate for the Opening/Establishment of New Kindergarten, Elementary (Grades 1 to 6) and Junior High School (Grades 7 to 10) Levels/Additional Grade Level for Elementary (Grades 1 to 6) and Junior High School (Grades 7 to 10) for Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application for the Issuance of Special Orders (SO) for Graduation of Private School Learners'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application for the Opening/Additional Offering of Senior High School (SHS) Program for Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application for the Renewal of Government Permit to Operate of Kindergarten, Elementary (Grades 1 to 6) and Junior High School (Grades 7 to 10) Levels of Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application of Summer Permit for Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application for Tuition and Other Fees Increase, No Increase, and Proposed New Fees of Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Application for Voluntary (Temporary/Permanent) Closure of Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Endorsement of Voluntary (Temporary/Permanent) Closure of Private Schools'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Recognition of Professional Development (PD) Programs – SDO Level'],
+                ['is_active'=>true, 'is_external'=>true, 'service_name'=>'Request for Basic Education Data'],
             ]],
-            ['code' => 'RECORDS', 'name' => 'Records Unit', 'services' => [
-                'Receiving / Releasing of Documents',
-                'File Retrieval',
-                'Certification / Authentication of Records',
-                'FOI Request',
-            ]],
-            ['code' => 'SUPPLY', 'name' => 'Supply and Property Unit', 'services' => [
-                'Issuance of Supplies',
-                'Property / Asset Disposal',
-                'Inventory Request',
-                'Requisition of Supplies',
-            ]],
-            ['code' => 'CASH', 'name' => 'Cash/Disbursing Unit', 'services' => [
-                'Processing of Salaries / Wages',
-                'Cash Advance Processing',
-                'Reimbursement Processing',
-                'Payroll Inquiry',
-            ]],
-            ['code' => 'CID', 'name' => 'Curriculum Implementation Division', 'services' => [
-                'Curriculum Review',
-                'Learning Material Request',
-                'Training / Workshop Registration',
-                'Instructional Support',
-            ]],
-            ['code' => 'CID-LRMS', 'name' => 'CID-Learning Resource Management Section', 'services' => [
-                'Book / Learning Material Distribution',
-                'Library Resource Request',
-                'LR Portal Assistance',
-                'Textbook Requisition',
-            ]],
-            ['code' => 'PHYSICAL', 'name' => 'Educational Facilities', 'services' => [
-                'School Building Inspection',
-                'Facility Repair Request',
-                'Construction Project Inquiry',
-                'Facility Assessment',
-            ]],
-            ['code' => 'HRD', 'name' => 'SGOD-Human Resource Development', 'services' => [
-                'Training Program Enrollment',
-                'Scholarship Application',
-                'Professional Development Inquiry',
-                'NDAP / NQP Assistance',
-            ]],
-            ['code' => 'PLANNING', 'name' => 'SGOD-Planning and Research', 'services' => [
-                'Research Proposal Review',
-                'Data Request',
-                'Planning Document Processing',
-                'Statistical Report Request',
-            ]],
-            ['code' => 'HEALTH', 'name' => 'SGOD- Health & Nutrition Unit', 'services' => [
-                'Medical / Dental Services',
-                'Health Program Enrollment',
-                'Nutrition Program Inquiry',
-                'Medical Certificate Request',
-            ]],
-            ['code' => 'SMME', 'name' => 'SGOD-School Management Monitoring and Evaluation Section', 'services' => [
-                'School Monitoring Report',
-                'Compliance Assessment',
-                'Evaluation Request',
-                'Quality Assurance Inquiry',
-            ]],
-            ['code' => 'SOCMOBNET', 'name' => 'SGOD-Social Mobilization and Networking & DRRM', 'services' => [
-                'Partnership / MOA Processing',
-                'Community Engagement',
-                'DRRM Coordination',
-                'Stakeholder Meeting Request',
-            ]],
-            ['code' => 'Office of the Chief ES-SGOD', 'name' => 'SGOD-Office of the Chief ES', 'services' => [
-                'Endorsement of Documents',
-                'Signing of Documents',
-                'General Inquiry',
-            ]],
-            ['code' => 'LFP', 'name' => 'SGOD-Learner Formation Program Unit', 'services' => [
-                'Student Affairs Concern',
-                'Discipline Referral',
-                'Guidance Counseling Request',
-                'Youth Formation Program',
-            ]],
+
         ];
 
         foreach ($offices as $data) {
+
             $services = $data['services'];
+
             unset($data['services']);
 
             $office = Office::create($data);
 
-            foreach ($services as $serviceName) {
+            foreach ($services as $service) {
                 Service::create([
                     'office_id' => $office->id,
-                    'name' => $serviceName,
+                    'name' => $service['service_name'],
+                    'is_external' => $service['is_external'],
                 ]);
             }
         }

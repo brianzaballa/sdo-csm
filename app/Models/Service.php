@@ -12,10 +12,12 @@ class Service extends Model
         'office_id',
         'name',
         'is_active',
+        'is_external',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_external' => 'boolean',
     ];
 
     // ── Relationships ──────────────────────────────────────
@@ -35,5 +37,15 @@ class Service extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    public function scopeExternal($query)
+    {
+        return $query->where('is_external', true);
+    }
+
+    public function scopeInternal($query)
+    {
+        return $query->where('is_external', false);
     }
 }
