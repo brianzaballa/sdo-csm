@@ -157,19 +157,16 @@
                         </div>
 
                         {{-- Office --}}
-                        <div x-data="{ officeSearch: '' }">
+                        <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">
                                 Office transacted with <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" x-model="officeSearch" placeholder="Search office..."
-                                   class="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-4 py-3 mb-2">
                             <select wire:model.live="officeId"
                                     class="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-4 py-3"
                                     {{ $officeLocked ? 'disabled' : '' }}>
                                 <option value="">Select Office</option>
                                 @foreach($this->offices as $office)
-                                    <option value="{{ $office->id }}"
-                                        x-show="officeSearch === '' || '{{ strtolower($office->display_name) }}'.includes(officeSearch.toLowerCase())">{{ $office->display_name }}</option>
+                                    <option value="{{ $office->id }}">{{ $office->display_name }}</option>
                                 @endforeach
                             </select>
                             @error('officeId') <p class="mt-1.5 text-sm text-red-500 flex items-center gap-1">
