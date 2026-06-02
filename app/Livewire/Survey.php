@@ -252,7 +252,7 @@ class Survey extends Component
 
         $endedAt = now();
         $durationSeconds = $this->startedAt
-            ? $endedAt->diffInSeconds($this->startedAt)
+            ? abs($endedAt->diffInSeconds($this->startedAt))
             : null;
 
         $response = $this->saveResponse(
