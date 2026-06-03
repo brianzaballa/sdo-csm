@@ -14,6 +14,8 @@ class SurveyResponse extends Model
         'age',
         'gender',
         'customer_type',
+        'email_address',
+        'complete_name',
         // CC
         'cc1',
         'cc2',

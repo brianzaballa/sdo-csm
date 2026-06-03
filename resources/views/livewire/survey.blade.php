@@ -194,6 +194,28 @@
                             </p> @enderror
                         </div>
 
+                        {{-- Email Address (optional) --}}
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">
+                                Email Address <span class="text-gray-400 font-normal">(optional)</span>
+                            </label>
+                            <input type="email" wire:model="emailAddress"
+                                   placeholder="you@example.com"
+                                   class="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-4 py-3">
+                            @error('emailAddress') <p class="mt-1.5 text-sm text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        {{-- Complete Name (optional) --}}
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">
+                                Complete Name <span class="text-gray-400 font-normal">(optional)</span>
+                            </label>
+                            <input type="text" wire:model="completeName"
+                                   placeholder="Juan Dela Cruz"
+                                   class="w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm px-4 py-3">
+                            @error('completeName') <p class="mt-1.5 text-sm text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             {{-- Age --}}
                             <div>

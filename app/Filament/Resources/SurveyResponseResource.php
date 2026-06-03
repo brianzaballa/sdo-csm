@@ -60,6 +60,16 @@ class SurveyResponseResource extends Resource
                     ->sortable()
                     ->toggleable(),
 
+                Tables\Columns\TextColumn::make('email_address')
+                    ->label('Email')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('complete_name')
+                    ->label('Name')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('customer_type')
                     ->label('Type')
                     ->badge()

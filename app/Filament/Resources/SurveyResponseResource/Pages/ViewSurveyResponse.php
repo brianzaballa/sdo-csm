@@ -26,6 +26,10 @@ class ViewSurveyResponse extends ViewRecord
                         \Filament\Infolists\Components\TextEntry::make('gender'),
                         \Filament\Infolists\Components\TextEntry::make('customer_type')
                             ->label('Customer Type'),
+                        \Filament\Infolists\Components\TextEntry::make('email_address')
+                            ->label('Email'),
+                        \Filament\Infolists\Components\TextEntry::make('complete_name')
+                            ->label('Name'),
                     ])
                     ->columns(2),
 

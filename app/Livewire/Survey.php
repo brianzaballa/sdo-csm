@@ -60,6 +60,12 @@ class Survey extends Component
     #[Rule('required|in:Business,Citizen,Government')]
     public ?string $customerType = null;
 
+    #[Rule('nullable|email|max:255')]
+    public ?string $emailAddress = null;
+
+    #[Rule('nullable|string|max:255')]
+    public ?string $completeName = null;
+
     // ── Step 2: Citizen's Charter ─────────────────────────
     #[Rule('required|integer|min:1|max:4')]
     public ?int $cc1 = null;
@@ -273,7 +279,7 @@ class Survey extends Component
     {
         $fields = [
             'currentStep', 'officeId', 'serviceId', 'age', 'gender',
-            'customerType', 'cc1', 'cc2', 'cc3',
+            'customerType', 'emailAddress', 'completeName', 'cc1', 'cc2', 'cc3',
             'sqd0', 'sqd1', 'sqd2', 'sqd3', 'sqd4',
             'sqd5', 'sqd6', 'sqd7', 'sqd8', 'suggestion',
             'startedAt',
@@ -301,6 +307,8 @@ class Survey extends Component
             'age' => $this->age,
             'gender' => $this->gender,
             'customer_type' => $this->customerType,
+            'email_address' => $this->emailAddress,
+            'complete_name' => $this->completeName,
             'cc1' => $this->cc1,
             'cc2' => $cc2,
             'cc3' => $cc3,

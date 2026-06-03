@@ -32,6 +32,12 @@ class SurveyResponseExporter extends Exporter
             ExportColumn::make('customer_type')
                 ->label('Customer Type'),
 
+            ExportColumn::make('email_address')
+                ->label('Email'),
+
+            ExportColumn::make('complete_name')
+                ->label('Name'),
+
             ExportColumn::make('cc1')
                 ->label('CC1')
                 ->formatStateUsing(fn ($state) => SurveyResponse::cc1Labels()[$state] ?? $state),
