@@ -180,13 +180,12 @@
         </script>
 
         {{-- Contact Section --}}
-        <section id="contact" class="py-20 sm:py-28 bg-white">
+        {{-- <section id="contact" class="py-20 sm:py-28 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">Contact Us</h2>
                 <div class="w-16 h-1 bg-teal-500 mx-auto mb-10 rounded-full"></div>
 
                 <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-                    {{-- Contact Info --}}
                     <div class="space-y-8">
                         <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
                             <h3 class="text-xl font-semibold text-gray-900 mb-6">Office Information</h3>
@@ -232,7 +231,6 @@
                         </div>
                     </div>
 
-                    {{-- Contact Form --}}
                     <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100">
                         <h3 class="text-xl font-semibold text-gray-900 mb-6">Send Us a Message</h3>
 
@@ -280,7 +278,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         {{-- Footer --}}
         <footer class="bg-gray-900 text-gray-400 py-8">

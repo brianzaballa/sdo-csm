@@ -21,9 +21,9 @@
                 </a>
                 <div class="flex items-center space-x-1 sm:space-x-4">
                     <a href="/" class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Home</a>
-                    <a href="#about" class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium transition-colors">About Us</a>
-                    <a href="#units-sections" class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Units &amp; Sections</a>
-                    <a href="#contact" class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                    <a href="/#about" class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium transition-colors">About Us</a>
+                    <a href="/#units-sections" class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Units &amp; Sections</a>
+                    {{-- <a href="/#contact" class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Contact</a> --}}
                     <a href="{{ route('survey') }}"
                        class="bg-teal-500 hover:bg-teal-400 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
                         Take Survey
